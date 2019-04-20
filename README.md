@@ -1,2 +1,2 @@
-# DRF-dynamic-relations
+# drf-dynamic-relations
 🥤Dynamically set eager load in Django REST Framework.
