@@ -1,2 +1,2 @@
 # DRF-dynamic-relations
-🥤Dynamically set relation fields in Django REST Framework serializers.
+🥤Dynamically set eager load in Django REST Framework.
