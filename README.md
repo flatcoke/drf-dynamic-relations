@@ -23,6 +23,7 @@ class UserSerializer(DynamicFieldsMixin, serializers.ModelSerializer):
         fields = ('id', 'username',)
         includible_fields = ('posts',)
 
+
 class UserViewSet(DynamicRelationMixin, viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-id')
     serializer_class = UserSerializer
@@ -79,4 +80,17 @@ class UserViewSet(DynamicRelationMixin, viewsets.ModelViewSet):
   ...
 ]
 
+```
+FROM
+```console
+(0.001) SELECT `users`.`id`, `users`.`username` FROM `users` ORDER BY `users`.`id` DESC; args=()
+(0.001) SELECT `posts`.`id`, `posts`.`user_id`, `posts`.`content`, FROM `posts` WHERE `posts`.`user_id` = 4 ORDER BY `posts`.`id` DESC; args=(4,)
+(0.001) SELECT `posts`.`id`, `posts`.`user_id`, `posts`.`content`, FROM `posts` WHERE `posts`.`user_id` = 3 ORDER BY `posts`.`id` DESC; args=(3,)
+(0.001) SELECT `posts`.`id`, `posts`.`user_id`, `posts`.`content`, FROM `posts` WHERE `posts`.`user_id` = 2 ORDER BY `posts`.`id` DESC; args=(2,)
+(0.001) SELECT `posts`.`id`, `posts`.`user_id`, `posts`.`content`, FROM `posts` WHERE `posts`.`user_id` = 1 ORDER BY `posts`.`id` DESC; args=(1,)
+```
+TO
+```console
+(0.001) SELECT `users`.`id`, `users`.`username` FROM `users` ORDER BY `users`.`id` DESC; args=()
+(0.001) SELECT `posts`.`id`, `posts`.`user_id`, `posts`.`content` FROM `posts` WHERE `posts`.`user_id` IN (1, 2, 3, 4) ORDER BY `posts`.`id` DESC; args=(1, 2, 3, 4)
 ```
