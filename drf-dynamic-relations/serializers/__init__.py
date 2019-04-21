@@ -1,0 +1,9 @@
+"""
+"""
+
+
+class DynamicFieldsMixin(object):
+    """
+
+    """
+    pass
