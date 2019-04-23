@@ -10,6 +10,8 @@ class DynamicRelationsMixin(object):
     A viewsets mixin that must be used with the restframework viewsets.
     """
 
+    QUERY_KEYS = ['include', 'fields']
+
     def get_queryset(self):
         """
         Filters the fields according to the `fields` in query parameter.
